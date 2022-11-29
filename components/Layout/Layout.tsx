@@ -9,6 +9,7 @@ import {
   Image,
   Stack,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
@@ -17,22 +18,28 @@ import Footer from "../Footer/Footer";
 import { ILayoutProps } from "./Layout.types";
 
 const Layout: React.FC<ILayoutProps> = ({ children }): JSX.Element => {
+  const { isOpen, onToggle } = useDisclosure();
   return (
     <Grid
-      templateAreas={`"header header cart "
+      templateAreas={`"header header cart"
               "nav main cart"
               "nav footer cart"`}
       gridTemplateRows={"100px 1fr 30px"}
-      gridTemplateColumns={"109px 1fr 500px"}
+      gridTemplateColumns={"auto 1fr "}
       h="100vh"
       gap="1"
       color="blackAlpha.700"
       fontWeight="bold"
     >
-      <Header />
-      <Sidebar />
+      <Header toogleOpenSideBar={onToggle} />
+      <Sidebar isOpenSideBar={isOpen} />
       <Cart />
-      <GridItem pl="2" bg="rgba(190, 195, 202, 0.3)" area={"main"}>
+      <GridItem
+        p="4"
+        bg="rgba(190, 195, 202, 0.3)"
+        area={"main"}
+        overflowY="auto"
+      >
         {children}
       </GridItem>
       <Footer />

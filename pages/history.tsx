@@ -1,12 +1,11 @@
 import type { NextPage, NextPageContext } from "next";
 import Layout from "../components/Layout/Layout";
 import History from "../containers/History/History";
-import Product from "../containers/Product/Product";
 
-const Home: NextPage = (): JSX.Element => {
+const HistoryPage: NextPage = (): JSX.Element => {
   return (
     <Layout>
-      <Product />
+      <History />
     </Layout>
   );
 };
@@ -14,8 +13,8 @@ const Home: NextPage = (): JSX.Element => {
 export async function getServerSideProps(context: NextPageContext) {
   return {
     props: {
-      title: "Home",
+      title: "History",
     },
   };
 }
-export default Home;
+export default HistoryPage;
