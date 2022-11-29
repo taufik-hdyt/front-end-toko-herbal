@@ -1,59 +1,38 @@
-import {
-  Box,
-  Card,
-  CardBody,
-  Grid,
-  GridItem,
-  Heading,
-  Image,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Grid, GridItem, Image, Text } from "@chakra-ui/react";
 import { memo } from "react";
+import { bubleStyles } from "./Product.styles";
 
 const Products: React.FC = (): JSX.Element => {
   return (
-    <Box>
-      <Grid
-        templateAreas={`"header header colom1 "
-                  "nav main main2"
-                  "nav footer main2"`}
-        gridTemplateRows={"100px 1fr 30px"}
-        gridTemplateColumns={"109px 1fr 500px"}
-        h="100vh"
-        gap="1"
-        color="blackAlpha.700"
-        fontWeight="bold"
+    <Box p="6">
+      <Box
+        rounded="md"
+        filter="drop-shadow(10px 15px 10px rgba(255, 143, 178, 0.25))"
+        bgGradient="linear-gradient(278.29deg, #FBB2B4 30.05%, rgba(255, 143, 178, 0) 133.19%)"
+        w="300px"
+        h="150px"
+        mb="5"
+        pos="relative"
       >
-        <GridItem pl="2" bg="orange.300" area={"header"}>
-          <Image ml="50px" mt="25px" src="/images/menu (1).png" alt="menu" />
-          <Text mt="-35px" textAlign="center" fontSize="30px" color="black">
-            Food Items
-          </Text>
-          <Box mt="-25px" ml="75%" width="300px" position="relative">
-            <Image
-              position="absolute"
-              mt="-5px"
-              ml="87%"
-              src="/images/search.png"
-              alt="search"
-            />
-          </Box>
-        </GridItem>
-        <GridItem pl="2" bg="orange.300" area={"colom1"}>
-          header 2
-        </GridItem>
-        <GridItem pl="2" bg="pink.300" area={"nav"}>
-          <Box ml="20px" mt="50px">
-            <Image mt="25px" src="/images/fork.png" alt="pesan" />
-            <Image mt="40px" src="/images/clip.png" alt="laporan" />
-            <Image mt="40px" src="/images/add.png" alt="add" />
-          </Box>
-        </GridItem>
-        <GridItem pl="2" bg="green.300" area={"main"}></GridItem>
-        <GridItem pl="2" bg="green.300" area={"footer"}>
-          footer
-        </GridItem>
+        <Box {...bubleStyles} />
+        <Box {...bubleStyles} top="30px" right="30px" />
+        <Box {...bubleStyles} top="50px" right="50px" />
+      </Box>
+      <Grid templateColumns="1fr 1fr 1fr 1fr" gap="8">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e: number, index: number) => {
+          const name = `Produk ${e}`;
+          return (
+            <GridItem key={`produk-item-${index}`}>
+              <Box w="full" bg="white" shadow="md" rounded="md">
+                <Image w="full" src="/images/bear.png" alt={name} />
+                <Box p="2">
+                  <Text>{name}</Text>
+                  <Text>Rp100.000</Text>
+                </Box>
+              </Box>
+            </GridItem>
+          );
+        })}
       </Grid>
     </Box>
   );

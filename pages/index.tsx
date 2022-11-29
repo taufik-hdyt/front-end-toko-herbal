@@ -1,14 +1,12 @@
-import { Box } from "@chakra-ui/react";
 import type { NextPage, NextPageContext } from "next";
-import Login from "../containers/Login/Login";
+import Layout from "../components/Layout/Layout";
 import Product from "../containers/Product/Product";
 
 const Home: NextPage = (): JSX.Element => {
   return (
-    <div>
+    <Layout>
       <Product />
-      {/* <Login /> */}
-    </div>
+    </Layout>
   );
 };
 
