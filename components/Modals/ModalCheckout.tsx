@@ -1,17 +1,17 @@
 import {
   Box,
   Button,
-  Flex,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Spacer,
   Text,
 } from "@chakra-ui/react";
 import { memo } from "react";
+import ListCheckOut from "./Partcials/listcheckout";
+
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
@@ -29,55 +29,27 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
         <Text fontSize="20px" fontWeight="semibold" ml="25px" mt="15px">
           Cashier : Pevita Pearce
         </Text>
-        <ModalBody>
-          <Box mt="100px">
-            <Flex>
-              <Box w="500px" fontSize="25px" fontWeight="bold">
-                Coffe Latte
-              </Box>
-              <Spacer />
-              <Box w="150px" fontSize="25px" fontWeight="semibold">
-                Rp. 30.000
-              </Box>
-            </Flex>
-            <Flex mt="15px">
-              <Box w="500px" fontSize="25px" fontWeight="bold">
-                Black Forest 1x
-              </Box>
-              <Spacer />
-              <Box w="150px" fontSize="25px" fontWeight="semibold">
-                Rp. 15.000
-              </Box>
-            </Flex>
+        <ModalBody pos="relative">
+          <Box
+            h="full"
+            display="flex"
+            justifyContent="end"
+            alignItems="flex-end"
+            bg="green.100"
+          >
+            <Text fontSize="25px" color="black" fontWeight="bold">
+              Total :
+            </Text>
+            <Text fontSize="25px" color="black" fontWeight="bold" ml="20px">
+              Rp. 105.000
+            </Text>
 
-            <Flex mt="15px">
-              <Box w="500px" fontSize="25px" fontWeight="bold">
-                Salmon Truffle Teriyaki 1x
-              </Box>
-              <Spacer />
-              <Box w="150px" fontSize="25px" fontWeight="semibold">
-                Rp. 60.000
-              </Box>
-            </Flex>
-
-            <Flex mt="15px">
-              <Box w="500px" fontSize="25px" fontWeight="bold">
-                Ppn 10%
-              </Box>
-              <Spacer />
-              <Box w="150px" fontSize="25px" fontWeight="semibold">
-                Rp. 10.500
-              </Box>
-            </Flex>
-
-            <Flex mt="15px" ml="410px">
-              <Box w="165px" fontSize="25px" fontWeight="semibold">
-                Total:
-              </Box>
-              <Box w="160px" fontSize="25px" fontWeight="semibold">
-                Rp. 115.500
-              </Box>
-            </Flex>
+            <Text fontSize="25px" color="black" fontWeight="bold">
+              Payment :
+            </Text>
+            <Text fontSize="25px" color="black" fontWeight="bold">
+              Cash
+            </Text>
           </Box>
         </ModalBody>
         <ModalFooter display="inline-block">
