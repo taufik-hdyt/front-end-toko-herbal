@@ -25,9 +25,14 @@ interface IProps {
 
 const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="3xl">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size="3xl"
+      scrollBehavior="outside"
+    >
       <ModalOverlay />
-      <ModalContent h="781px">
+      <ModalContent>
         <ModalHeader>
           <Flex>
             <Box>
@@ -58,15 +63,19 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
           </Flex>
         </ModalHeader>
 
-        <ModalBody mt="100px" overflowY="auto">
-          <VStack align="stretch">
+        <ModalBody>
+          <VStack mt={"3"} align="stretch">
+            <ListCheckOut />
+            <ListCheckOut />
+            <ListCheckOut />
+            <ListCheckOut />
             <ListCheckOut />
             <ListCheckOut />
             <ListCheckOut />
             <ListCheckOut />
           </VStack>
         </ModalBody>
-        <Box pl="6" pt="5" pr="10">
+        <Box pl="6" pt="5" pr="7">
           <Flex>
             <Box>
               <Text fontSize="25px" color="black" fontWeight="semibold">
@@ -74,6 +83,7 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
               </Text>
             </Box>
             <Spacer />
+
             <Box>
               <Text fontSize="25px" color="black" fontWeight="semibold">
                 Rp. 10.500
@@ -89,7 +99,7 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
             </Text>
           </Box>
           <Box>
-            <Text fontSize="25px" color="black" fontWeight="semibold" ml="20px">
+            <Text fontSize="25px" color="black" fontWeight="semibold" pl="5">
               Rp. 105.000
             </Text>
           </Box>

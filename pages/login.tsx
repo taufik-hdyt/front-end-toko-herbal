@@ -1,30 +1,26 @@
 import type { NextPage, NextPageContext } from "next";
-import Layout from "../components/Layout/Layout";
-import Product from "../containers/Product/Product";
+import Login from "../containers/Login/Login";
 import nookies from "nookies";
 import { redirect } from "next/dist/server/api-utils";
+import { NextPage } from "next";
 
-const Home: NextPage = (): JSX.Element => {
-  return (
-    <Layout>
-      <Product />
-    </Layout>
-  );
+const LoginPage: NextPage = (): JSX.Element => {
+  return <Login />;
 };
 
 export async function getServerSideProps(context: NextPageContext) {
   const cookies = nookies.get(context);
-  if (!cookies.token) {
+  if (cookies.token) {
     return {
       redirect: {
-        destination: "login",
+        destination: "/",
       },
     };
   }
   return {
     props: {
-      title: "Home",
+      title: "Login",
     },
   };
 }
-export default Home;
+export default LoginPage;
