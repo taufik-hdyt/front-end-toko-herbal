@@ -1,4 +1,4 @@
-import { Box, GridItem, Image, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Box, GridItem, Image, useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import { memo } from "react";
 import ModalAddItem from "../Modals/ModalAddItem";
@@ -26,6 +26,7 @@ const Sidebar: React.FC<IProps> = ({ isOpenSideBar }): JSX.Element => {
         </Link>
         <Image onClick={onOpen} mt="40px" src="/images/add.png" alt="add" />
       </Box>
+
       <ModalAddItem isOpen={isOpen} onClose={onClose} />
     </GridItem>
   );

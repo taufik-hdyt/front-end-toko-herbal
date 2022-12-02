@@ -2,7 +2,6 @@ import type { NextPage, NextPageContext } from "next";
 import Login from "../containers/Login/Login";
 import nookies from "nookies";
 import { redirect } from "next/dist/server/api-utils";
-import { NextPage } from "next";
 
 const LoginPage: NextPage = (): JSX.Element => {
   return <Login />;
