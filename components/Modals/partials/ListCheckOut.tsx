@@ -8,20 +8,25 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { memo } from "react";
+import { useAppSelector } from "../../../hooks/hooks";
+import { ICartItem } from "../../../redux/slices/cart.slices";
+interface IProps {
+  cartItem: ICartItem;
+}
 
-const ListCheckOut: React.FC = (): JSX.Element => {
+const ListCheckOut: React.FC<IProps> = ({ cartItem }): JSX.Element => {
   return (
     <Box>
       <Flex pt="5">
         <Box>
           <Text fontSize="25px" color="black" fontWeight="semibold">
-            Coffe Latte
+            {cartItem.name}
           </Text>
         </Box>
         <Spacer />
         <Box>
           <Text fontSize="25px" color="black" fontWeight="semibold">
-            Rp. 50.000
+            Rp.{cartItem.price * cartItem.qty}
           </Text>
         </Box>
       </Flex>

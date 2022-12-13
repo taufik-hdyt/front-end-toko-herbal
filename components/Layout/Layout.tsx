@@ -17,8 +17,12 @@ import Cart from "../Cart/Cart";
 import Footer from "../Footer/Footer";
 import { ILayoutProps } from "./Layout.types";
 
-const Layout: React.FC<ILayoutProps> = ({ children }): JSX.Element => {
+const Layout: React.FC<ILayoutProps> = ({
+  children,
+  onOpenModal,
+}): JSX.Element => {
   const { isOpen, onToggle } = useDisclosure();
+
   return (
     <Grid
       templateAreas={`"header header cart"
@@ -32,7 +36,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }): JSX.Element => {
       fontWeight="bold"
     >
       <Header toogleOpenSideBar={onToggle} />
-      <Sidebar isOpenSideBar={isOpen} />
+      <Sidebar onOpenModal={onOpenModal} isOpenSideBar={isOpen} />
       <Cart />
       <GridItem
         p="4"

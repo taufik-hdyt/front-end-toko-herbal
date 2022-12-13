@@ -1,5 +1,4 @@
 import type { NextPage, NextPageContext } from "next";
-import Login from "../containers/Login/Login";
 import Register from "../containers/Register/Register";
 import nookies from "nookies";
 

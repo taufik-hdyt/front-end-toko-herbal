@@ -1,37 +1,83 @@
-import { Box, Button, Grid, GridItem, Image, Text } from "@chakra-ui/react";
-import { memo, useEffect, useState } from "react";
-import axios from "axios";
+import { Box, Grid, GridItem, Image, Text } from "@chakra-ui/react";
+import React, { memo, useEffect, useState } from "react";
+import { useProductAction } from "./Product.action";
+import ModalAddItem from "../../components/Modals/ModalAddItem";
+import { addTocard } from "../../redux/slices/cart.slices";
+import { useAppDispatch } from "../../hooks/hooks";
+import Pagination from "../../components/Pagination";
+import { useRouter } from "next/router";
 
-const Products: React.FC = (): JSX.Element => {
+interface IProps {
+  token: string;
+  isOpenModal: boolean;
+}
+
+const Products: React.FC<IProps> = ({ token, isOpenModal }): JSX.Element => {
+  const router = useRouter();
+  const {
+    addProduct,
+    products,
+    getListProduct,
+    onToggle,
+    onClose,
+    isOpen,
+    meta,
+  } = useProductAction(token);
+  console.log(meta);
+
+  const dispatch = useAppDispatch();
+  const handlePageClick = (p: number) => {
+    getListProduct(p);
+  };
+
+  //=============== memanggil dari Product.action.tsx ==================
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/v1/user")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+    getListProduct();
+  }, []);
+
+  //=================== memanngil untuk membuka open modal ==================
+  useEffect(() => {
+    if (isOpenModal) {
+      onToggle();
+    }
+  }, [isOpenModal]);
   return (
     <Box>
       <Grid templateColumns="1fr 1fr 1fr 1fr" gap="8">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e: number, index: number) => {
-          const name = `Produk ${e}`;
+        {products?.map((product: any, index: number) => {
           return (
             <GridItem key={`produk-item-${index}`}>
-              <Box w="full" bg="white" shadow="md" rounded="md">
-                <Image w="full" src="/images/bear.png" alt={name} />
+              <Box
+                h="full"
+                w="full"
+                bg="white"
+                shadow="md"
+                rounded="md"
+                onClick={() => dispatch(addTocard(product))}
+              >
+                <Image w="full" src="/images/bear.png" alt={product.name} />
                 <Box p="2">
-                  <Text>{name}</Text>
-                  <Text>Rp100.000</Text>
-                  <Button mt="4">View</Button>
+                  <Text textAlign="center" fontSize="25px">
+                    {product.name}
+                  </Text>
+                  <Text textAlign="center" fontWeight="bold" fontSize="25px">
+                    Rp.{product.price}
+                  </Text>
+                  <Text>{product.stock}</Text>
                 </Box>
               </Box>
             </GridItem>
           );
         })}
       </Grid>
+      <ModalAddItem addProduct={addProduct} isOpen={isOpen} onClose={onClose} />
+
+      <Pagination
+        onChange={handlePageClick}
+        pageSize={meta?.limit ?? 0}
+        current={meta?.page ?? 0}
+        total={meta?.totalData ?? 0}
+      />
     </Box>
   );
 };

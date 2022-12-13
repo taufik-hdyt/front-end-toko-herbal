@@ -8,7 +8,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { memo } from "react";
-
+import { useState } from "react";
 import ModalSearch from "../Modals/ModalSearch";
 
 interface IProps {
@@ -17,6 +17,7 @@ interface IProps {
 
 const Header: React.FC<IProps> = ({ toogleOpenSideBar }): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <GridItem pl="2" area={"header"}>
       <Flex px="5" h="100px" align="center" justify="space-between">

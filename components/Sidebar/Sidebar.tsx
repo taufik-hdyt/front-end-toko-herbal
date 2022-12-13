@@ -1,13 +1,16 @@
-import { Avatar, Box, GridItem, Image, useDisclosure } from "@chakra-ui/react";
+import { Box, GridItem, Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
+import { useState } from "react";
 import { memo } from "react";
-import ModalAddItem from "../Modals/ModalAddItem";
+
 interface IProps {
   isOpenSideBar: boolean;
+  onOpenModal: () => void;
 }
-const Sidebar: React.FC<IProps> = ({ isOpenSideBar }): JSX.Element => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+const Sidebar: React.FC<IProps> = ({
+  isOpenSideBar,
+  onOpenModal,
+}): JSX.Element => {
   return (
     <GridItem pl="2" area={"nav"}>
       <Box
@@ -24,10 +27,25 @@ const Sidebar: React.FC<IProps> = ({ isOpenSideBar }): JSX.Element => {
         <Link href="/history">
           <Image mt="40px" src="/images/clip.png" alt="laporan" />
         </Link>
-        <Image onClick={onOpen} mt="40px" src="/images/add.png" alt="add" />
+        <Image
+          onClick={onOpenModal}
+          mt="40px"
+          src="/images/add.png"
+          alt="add"
+        />
       </Box>
 
-      <ModalAddItem isOpen={isOpen} onClose={onClose} />
+      <Box
+        pos={"absolute"}
+        left="130px"
+        top="150px"
+        fontSize="20px"
+        display="none"
+      >
+        <Text>All Product</Text>
+        <Text mt="16">History</Text>
+        <Text mt="14">Add Product</Text>
+      </Box>
     </GridItem>
   );
 };

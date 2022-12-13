@@ -15,6 +15,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { memo } from "react";
+import { useAppSelector } from "../../hooks/hooks";
+import { ICartItem } from "../../redux/slices/cart.slices";
 
 import ListCheckOut from "./partials/ListCheckOut";
 
@@ -24,6 +26,7 @@ interface IProps {
 }
 
 const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
+  const { cartItems } = useAppSelector((state) => state.cart);
   return (
     <Modal
       isOpen={isOpen}
@@ -65,17 +68,17 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
 
         <ModalBody>
           <VStack mt={"3"} align="stretch">
-            <ListCheckOut />
-            <ListCheckOut />
-            <ListCheckOut />
-            <ListCheckOut />
-            <ListCheckOut />
-            <ListCheckOut />
-            <ListCheckOut />
-            <ListCheckOut />
+            {cartItems?.map((cartItem: ICartItem, index: number) => {
+              return (
+                <ListCheckOut
+                  cartItem={cartItem}
+                  key={`produk-item-${index}`}
+                />
+              );
+            })}
           </VStack>
         </ModalBody>
-        <Box pl="6" pt="5" pr="7">
+        {/* <Box pl="6" pt="5" pr="7">
           <Flex>
             <Box>
               <Text fontSize="25px" color="black" fontWeight="semibold">
@@ -90,7 +93,7 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
               </Text>
             </Box>
           </Flex>
-        </Box>
+        </Box> */}
 
         <Flex pr="8" pt="10" justify="flex-end">
           <Box>
@@ -100,7 +103,10 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
           </Box>
           <Box>
             <Text fontSize="25px" color="black" fontWeight="semibold" pl="5">
-              Rp. 105.000
+              Rp.
+              {cartItems
+                ?.map((e) => e.price * e.qty)
+                .reduce((a, b) => a + b, 0) ?? 0}
             </Text>
           </Box>
         </Flex>

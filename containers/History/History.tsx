@@ -1,12 +1,4 @@
-import {
-  Box,
-  Grid,
-  GridItem,
-  Heading,
-  HStack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Grid, GridItem, Text, VStack } from "@chakra-ui/react";
 import { ApexOptions } from "apexcharts";
 import { memo } from "react";
 
@@ -14,7 +6,7 @@ import {
   bubleStyles,
   bubleStyles2,
   bubleStyles3,
-} from "../Product/Product.styles";
+} from "./Partcials/Product.styles";
 import { Chart } from "./Partcials";
 
 const History: React.FC = (): JSX.Element => {
@@ -32,7 +24,7 @@ const History: React.FC = (): JSX.Element => {
             <Box {...bubleStyles} />
             <Box {...bubleStyles} top="30px" right="50px" />
             <Box {...bubleStyles} top="50px" right="100px" />
-            <VStack>
+            <VStack h="full" justify="center">
               <Text fontSize="15px">Today’s Income</Text>
               <Text fontSize="25px">Rp. 1.000.000</Text>
               <Text fontSize="15px">+2% Yesterday</Text>
@@ -50,7 +42,7 @@ const History: React.FC = (): JSX.Element => {
             <Box {...bubleStyles2} />
             <Box {...bubleStyles2} top="30px" right="50px" />
             <Box {...bubleStyles2} top="50px" right="100px" />
-            <VStack ml="30px">
+            <VStack ml="30px" h="full" justify="center">
               <Text fontSize="15px">Orders</Text>
               <Text fontSize="25px">3.270</Text>
               <Text fontSize="15px">+5% Last Week</Text>
@@ -69,7 +61,7 @@ const History: React.FC = (): JSX.Element => {
             <Box {...bubleStyles3} />
             <Box {...bubleStyles3} top="30px" right="50px" />
             <Box {...bubleStyles3} top="50px" right="100px" />
-            <VStack ml="30px">
+            <VStack ml="30px" h="full" justify="center">
               <Text fontSize="15px">This Year’s Income</Text>
               <Text fontSize="25px">Rp. 100.000.000.000</Text>
               <Text fontSize="15px">+10% Last Year</Text>

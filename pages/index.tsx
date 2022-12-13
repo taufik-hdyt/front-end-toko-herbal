@@ -2,12 +2,16 @@ import type { NextPage, NextPageContext } from "next";
 import Layout from "../components/Layout/Layout";
 import Product from "../containers/Product/Product";
 import nookies from "nookies";
-import { redirect } from "next/dist/server/api-utils";
+import { useDisclosure } from "@chakra-ui/react";
 
-const Home: NextPage = (): JSX.Element => {
+interface IProps {
+  token: string;
+}
+const Home: NextPage<IProps> = ({ token }): JSX.Element => {
+  const { isOpen: isOpenModal, onToggle: onOpenModal } = useDisclosure();
   return (
-    <Layout>
-      <Product />
+    <Layout onOpenModal={onOpenModal}>
+      <Product isOpenModal={isOpenModal} token={token} />
     </Layout>
   );
 };
@@ -17,13 +21,14 @@ export async function getServerSideProps(context: NextPageContext) {
   if (!cookies.token) {
     return {
       redirect: {
-        destination: "login",
+        destination: "/login",
       },
     };
   }
   return {
     props: {
       title: "Home",
+      token: cookies?.token ?? null,
     },
   };
 }
