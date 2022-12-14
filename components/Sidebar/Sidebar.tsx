@@ -34,18 +34,13 @@ const Sidebar: React.FC<IProps> = ({
           alt="add"
         />
       </Box>
-
-      <Box
-        pos={"absolute"}
-        left="130px"
-        top="150px"
-        fontSize="20px"
-        display="none"
-      >
-        <Text>All Product</Text>
-        <Text mt="16">History</Text>
-        <Text mt="14">Add Product</Text>
-      </Box>
+      {isOpenSideBar === true && (
+        <Box fontSize="20px" pos="absolute" left="130px" top="160px">
+          <Text>All Product</Text>
+          <Text mt="16">History</Text>
+          <Text mt="14">Add Product</Text>
+        </Box>
+      )}
     </GridItem>
   );
 };

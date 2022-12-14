@@ -70,10 +70,12 @@ const CheckOut: React.FC = (): JSX.Element => {
             Cancel
           </Button>
         </GridItem>
-        <Box pos="absolute" top="150px" right="100px">
-          <Image src="/images/cart kosong.png" alt="cart kosong" />
-          <Text>Keranjang Kosong Yuk Di Order</Text>
-        </Box>
+        {cartItems.length === 0 && (
+          <Box pos="absolute" top="150px" right="100px">
+            <Image src="/images/cart kosong.png" alt="cart kosong" />
+            <Text>Keranjang Kosong Yuk Di Order</Text>
+          </Box>
+        )}
       </Grid>
 
       <ModalCheckout isOpen={isOpen} onClose={onClose} />

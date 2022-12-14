@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Image, Text } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Image, Spacer, Text } from "@chakra-ui/react";
 import React, { memo, useEffect, useState } from "react";
 import { useProductAction } from "./Product.action";
 import ModalAddItem from "../../components/Modals/ModalAddItem";
@@ -54,6 +54,7 @@ const Products: React.FC<IProps> = ({ token, isOpenModal }): JSX.Element => {
                 shadow="md"
                 rounded="md"
                 onClick={() => dispatch(addTocard(product))}
+                cursor="pointer"
               >
                 <Image w="full" src="/images/bear.png" alt={product.name} />
                 <Box p="2">
@@ -70,6 +71,7 @@ const Products: React.FC<IProps> = ({ token, isOpenModal }): JSX.Element => {
           );
         })}
       </Grid>
+
       <ModalAddItem addProduct={addProduct} isOpen={isOpen} onClose={onClose} />
 
       <Pagination
