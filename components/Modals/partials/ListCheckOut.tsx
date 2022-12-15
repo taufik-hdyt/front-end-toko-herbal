@@ -22,6 +22,9 @@ const ListCheckOut: React.FC<IProps> = ({ cartItem }): JSX.Element => {
           <Text fontSize="25px" color="black" fontWeight="semibold">
             {cartItem.name}
           </Text>
+          <Text fontSize="25px" color="black" fontWeight="semibold">
+            {cartItem.qty}
+          </Text>
         </Box>
         <Spacer />
         <Box>

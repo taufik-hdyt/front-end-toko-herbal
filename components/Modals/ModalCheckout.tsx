@@ -2,8 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  Grid,
-  GridItem,
   Modal,
   ModalBody,
   ModalContent,
@@ -14,11 +12,12 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { memo } from "react";
-import { useAppSelector } from "../../hooks/hooks";
-import { ICartItem } from "../../redux/slices/cart.slices";
-
+import { FormEvent, memo } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { clearCard, ICartItem } from "../../redux/slices/cart.slices";
+import axios from "axios";
 import ListCheckOut from "./partials/ListCheckOut";
+import nookies from "nookies";
 
 interface IProps {
   isOpen: boolean;
@@ -27,6 +26,36 @@ interface IProps {
 
 const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
   const { cartItems } = useAppSelector((state) => state.cart);
+  const cookies = nookies.get();
+  const token = cookies?.token ?? null;
+  const dispath = useAppDispatch();
+
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  const order = (e: FormEvent) => {
+    e.preventDefault();
+    const body = {
+      cart_items: cartItems.map((e) => {
+        return {
+          id_product: e.id,
+          qty: e.qty,
+        };
+      }),
+    };
+    console.log(body);
+    axios
+      .post("http://localhost:5000/api/v1/order", body, config)
+      .then(function (response) {
+        console.log(response);
+        onClose();
+        dispath(clearCard());
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
     <Modal
       isOpen={isOpen}
@@ -35,6 +64,7 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
       scrollBehavior="outside"
     >
       <ModalOverlay />
+
       <ModalContent>
         <ModalHeader>
           <Flex>
@@ -78,22 +108,6 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
             })}
           </VStack>
         </ModalBody>
-        {/* <Box pl="6" pt="5" pr="7">
-          <Flex>
-            <Box>
-              <Text fontSize="25px" color="black" fontWeight="semibold">
-                Ppn10%
-              </Text>
-            </Box>
-            <Spacer />
-
-            <Box>
-              <Text fontSize="25px" color="black" fontWeight="semibold">
-                Rp. 10.500
-              </Text>
-            </Box>
-          </Flex>
-        </Box> */}
 
         <Flex pr="8" pt="10" justify="flex-end">
           <Box>
@@ -111,21 +125,15 @@ const ModalCheckout: React.FC<IProps> = ({ isOpen, onClose }): JSX.Element => {
           </Box>
         </Flex>
 
-        <Flex justify="flex-start" pl="7">
-          <Box>
-            <Text fontSize="25px" color="black" fontWeight="semibold">
-              Payment :
-            </Text>
-          </Box>
-          <Box>
-            <Text fontSize="25px" color="black" fontWeight="semibold" ml="20px">
-              Cash
-            </Text>
-          </Box>
-        </Flex>
-
         <ModalFooter display="inline-block">
-          <Button fontSize="35px" w="full" h="70px" bg="#F24F8A" color="white">
+          <Button
+            fontSize="35px"
+            w="full"
+            h="70px"
+            bg="#F24F8A"
+            color="white"
+            onClick={order}
+          >
             Print
           </Button>
           <Text textAlign="center" fontSize="25px" fontWeight="semibold">

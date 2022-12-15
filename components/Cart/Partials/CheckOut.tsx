@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { memo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-import { clearCard, ICartItem } from "../../../redux/slices/cart.slices";
+import { clearCard } from "../../../redux/slices/cart.slices";
 import ModalCheckout from "../../Modals/ModalCheckout";
 
 const CheckOut: React.FC = (): JSX.Element => {

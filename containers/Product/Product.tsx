@@ -1,5 +1,14 @@
-import { Box, Grid, GridItem, Image, Spacer, Text } from "@chakra-ui/react";
-import React, { memo, useEffect, useState } from "react";
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  HStack,
+  Image,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
+import React, { memo, useEffect } from "react";
 import { useProductAction } from "./Product.action";
 import ModalAddItem from "../../components/Modals/ModalAddItem";
 import { addTocard } from "../../redux/slices/cart.slices";
@@ -64,7 +73,7 @@ const Products: React.FC<IProps> = ({ token, isOpenModal }): JSX.Element => {
                   <Text textAlign="center" fontWeight="bold" fontSize="25px">
                     Rp.{product.price}
                   </Text>
-                  <Text>{product.stock}</Text>
+                  <Text> {product.stock}</Text>
                 </Box>
               </Box>
             </GridItem>
@@ -74,12 +83,14 @@ const Products: React.FC<IProps> = ({ token, isOpenModal }): JSX.Element => {
 
       <ModalAddItem addProduct={addProduct} isOpen={isOpen} onClose={onClose} />
 
-      <Pagination
-        onChange={handlePageClick}
-        pageSize={meta?.limit ?? 0}
-        current={meta?.page ?? 0}
-        total={meta?.totalData ?? 0}
-      />
+      <Flex pos="absolute" bottom="1" bg="gray.100" ml="500px" fontSize="20px">
+        <Pagination
+          onChange={handlePageClick}
+          pageSize={meta?.limit ?? 0}
+          current={meta?.page ?? 0}
+          total={meta?.totalData ?? 0}
+        />
+      </Flex>
     </Box>
   );
 };
